@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Case File: Happy Birthday, Alex</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --panel: #141414;
+    --line: #2a2a2a;
+    --white: #f2f2f2;
+    --grey: #8a8a8a;
+    --accent: #e0e0e0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+  body { position: relative; }
+
+  /* falling sugar cubes */
+  #sugarCanvas {
+    position: fixed; top:0; left:0;
+    width:100%; height:100%;
+    pointer-events:none;
+    z-index: 1;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 50px 20px 80px;
+  }
+
+  .l-mark {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 5rem;
+    text-align: center;
+    letter-spacing: 4px;
+    animation: flicker 4s infinite;
+    text-shadow: 0 0 20px rgba(255,255,255,0.4);
+  }
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    45% { opacity: 1; }
+    47% { opacity: 0.4; }
+    49% { opacity: 1; }
+    72% { opacity: 1; }
+    74% { opacity: 0.5; }
+    76% { opacity: 1; }
+  }
+
+  .case-label {
+    text-align: center;
+    letter-spacing: 3px;
+    color: var(--grey);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-top: -10px;
+  }
+
+  h1.title {
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+    margin: 30px 0 6px;
+    letter-spacing: 1px;
+  }
+  .sub {
+    text-align: center;
+    color: var(--grey);
+    font-size: 0.85rem;
+    margin-bottom: 35px;
+  }
+
+  .terminal {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 22px;
+    margin: 20px 0;
+    min-height: 90px;
+  }
+  .terminal .prompt { color: var(--grey); font-size: 0.75rem; margin-bottom: 8px; }
+  #typedLine { font-size: 1rem; line-height: 1.6; }
+  .cursor-blink {
+    display: inline-block;
+    width: 8px; height: 1em;
+    background: var(--white);
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .meter-box {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+    background: var(--panel);
+  }
+  .meter-label {
+    display:flex; justify-content: space-between;
+    font-size: 0.8rem; color: var(--grey); margin-bottom: 8px;
+  }
+  .meter-track {
+    height: 10px; background: #222; border-radius: 5px; overflow:hidden;
+    border: 1px solid var(--line);
+  }
+  .meter-fill {
+    height: 100%; background: repeating-linear-gradient(45deg,#eee,#eee 6px,#ccc 6px,#ccc 12px);
+    width: 0%; transition: width 1.4s ease;
+  }
+  .meter-value { text-align:right; font-size: 1.2rem; margin-top: 6px; }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 25px 0;
+  }
+  .file-card {
+    border: 1px dashed var(--line);
+    background: var(--panel);
+    padding: 16px 12px;
+    text-align: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.15s;
+    user-select: none;
+  }
+  .file-card:hover { background: #1c1c1c; transform: translateY(-2px); }
+  .file-card.open {
+    text-align: left;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--accent);
+  }
+  .file-card .tag { color: var(--grey); font-size: 0.7rem; display:block; margin-bottom:6px; }
+
+  .quiz-box {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px;
+    margin: 25px 0;
+    background: var(--panel);
+  }
+  .quiz-box p.q { margin-bottom: 12px; font-size: 0.9rem; }
+  .quiz-options button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: #1a1a1a;
+    color: var(--white);
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .quiz-options button:hover { background: #262626; }
+  #quizResult {
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-top: 10px;
+    min-height: 1.2em;
+  }
+
+  .verdict-btn {
+    display: block;
+    margin: 35px auto 0;
+    background: var(--white);
+    color: #000;
+    border: none;
+    padding: 14px 26px;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .verdict-btn:active { transform: scale(0.97); }
+
+  #verdictReveal {
+    display: none;
+    margin-top: 25px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    padding: 30px 24px;
+    text-align: center;
+    background: linear-gradient(160deg, #0d0d0d 0%, #1a0e05 60%, #2b1400 100%);
+    border: 2px solid #ff6a00;
+    box-shadow: 0 0 25px rgba(255,106,0,0.25);
+  }
+  #verdictReveal.show { display: block; animation: fadeIn 0.6s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity:1; transform: translateY(0);} }
+
+  .slash {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, #ff6a00, #ffd6a0, #ff6a00, transparent);
+    height: 3px;
+    width: 140%;
+    opacity: 0.55;
+    filter: blur(0.3px);
+  }
+  .slash1 { top: 18%; left: -20%; transform: rotate(-18deg); }
+  .slash2 { top: 55%; left: -20%; transform: rotate(-18deg); opacity: 0.35; }
+  .slash3 { top: 82%; left: -20%; transform: rotate(-18deg); opacity: 0.25; }
+
+  .ichigo-mark {
+    font-family: Georgia, serif;
+    font-size: 1.9rem;
+    letter-spacing: 4px;
+    color: #ff8c1a;
+    text-shadow: 0 0 12px rgba(255,140,26,0.7), 0 0 2px #fff;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+  }
+  .ichigo-sub {
+    color: #ffb066;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+  }
+  .ichigo-msg {
+    color: #f2f2f2;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 2;
+  }
+  .ichigo-msg b { color: #ff8c1a; }
+
+  .footer-note {
+    text-align: center;
+    color: var(--grey);
+    font-size: 0.7rem;
+    margin-top: 40px;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 480px) {
+    .cards { grid-template-columns: 1fr; }
+    .l-mark { font-size: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="sugarCanvas"></canvas>
+
+<div class="wrap">
+  <div class="l-mark">L</div>
+  <div class="case-label">Case File — Classified</div>
+
+  <h1 class="title">HAPPY BIRTHDAY, ALEX</h1>
+  <div class="sub">Subject: world's laziest-looking genius. Sweet tooth: catastrophic.</div>
+
+  <div class="terminal">
+    <div class="prompt">// analysis in progress...</div>
+    <div id="typedLine"><span class="cursor-blink"></span></div>
+  </div>
+
+  <div class="meter-box">
+    <div class="meter-label"><span>Probability Alex is somehow still your favorite person</span><span id="meterPct">0%</span></div>
+    <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
+    <div class="meter-value" id="meterVerdict"></div>
+  </div>
+
+  <div class="cards" id="cardGrid">
+    <div class="file-card" data-id="1"><span class="tag">EXHIBIT A</span>Tap to reveal</div>
+    <div class="file-card" data-id="2"><span class="tag">EXHIBIT B</span>Tap to reveal</div>
+    <div class="file-card" data-id="3"><span class="tag">EXHIBIT C</span>Tap to reveal</div>
+    <div class="file-card" data-id="4"><span class="tag">EXHIBIT D</span>Tap to reveal</div>
+  </div>
+
+  <div class="quiz-box">
+    <p class="q">Deduction test: if Alex were left alone with an entire birthday cake, what happens in the next 10 minutes?</p>
+    <div class="quiz-options">
+      <button onclick="quizAnswer(this,'Correct. Sitting cross-legged on the chair, thumb barely used, cake reduced to crumbs and a faint sugar high radiating off him.')">He eats the whole thing, sitting like a gremlin</button>
+      <button onclick="quizAnswer(this,'A valid theory, but insufficient. He saves a slice for later and then eats that slice nine minutes later.')">He saves a polite slice for later</button>
+      <button onclick="quizAnswer(this,'Statistically improbable. There is no known timeline in which Alex shares dessert willingly.')">He shares it evenly with everyone</button>
+    </div>
+    <div id="quizResult"></div>
+  </div>
+
+  <button class="verdict-btn" onclick="revealVerdict()">Open Birthday Card</button>
+  <div id="verdictReveal">
+    <div class="slash slash1"></div>
+    <div class="slash slash2"></div>
+    <div class="slash slash3"></div>
+    <div class="ichigo-mark">一護</div>
+    <div class="ichigo-sub">Getsuga · Happy Birthday</div>
+    <div class="ichigo-msg">
+      Case reopened, substitute shinigami style. Forget deduction — this one's pure <b>Getsuga Tensho</b> energy.<br><br>
+      Loud, orange-headed, allergic to giving up, and somehow always the one holding the group together when it matters.<br><br>
+      Here's to another year of chaos, bad decisions, and main-character energy, Alex.<br>
+      <b>Happy Birthday.</b> 🍊⚔️
+    </div>
+  </div>
+
+  <div class="footer-note">FILE CLOSED — INVESTIGATION: SUCCESSFUL BIRTHDAY</div>
+</div>
+
+<script>
+  // Typewriter intro
+  const lines = [
+    "Subject displays abnormally high energy for someone who forgets his own keys.",
+    "Deduction: loyal, hilarious, allergic to seriousness.",
+    "Conclusion: this person deserves a very good birthday."
+  ];
+  let li = 0, ci = 0;
+  const typedEl = document.getElementById('typedLine');
+  function typeLoop() {
+    if (li >= lines.length) return;
+    const line = lines[li];
+    if (ci <= line.length) {
+      typedEl.innerHTML = line.slice(0, ci) + '<span class="cursor-blink"></span>';
+      ci++;
+      setTimeout(typeLoop, 35);
+    } else {
+      setTimeout(() => {
+        li++; ci = 0;
+        if (li < lines.length) typeLoop();
+        else typedEl.innerHTML = lines[lines.length-1] + '<span class="cursor-blink"></span>';
+      }, 1200);
+    }
+  }
+  typeLoop();
+
+  // Meter animation
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('meterFill').style.width = '99%';
+      let val = 0;
+      const target = 99;
+      const step = setInterval(() => {
+        val += 3;
+        if (val >= target) { val = target; clearInterval(step); }
+        document.getElementById('meterPct').textContent = val + '%';
+      }, 30);
+      document.getElementById('meterVerdict').textContent = "Verdict: statistically undeniable.";
+    }, 600);
+  });
+
+  // File cards
+  const cardData = {
+    1: "Known to enter a room and immediately forget why he walked in. Repeat offender.",
+    2: "Capable of making an entire group laugh without even trying. Suspiciously good at it.",
+    3: "Has never once turned down a snack. Confidence level: absolute.",
+    4: "Despite the chaos, everyone in this file agrees: they'd pick him on their team, every time."
+  };
+  document.querySelectorAll('.file-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.dataset.id;
+      if (card.classList.contains('open')) return;
+      card.classList.add('open');
+      card.innerHTML = '<span class="tag">EXHIBIT ' + 'ABCD'[id-1] + '</span>' + cardData[id];
+    });
+  });
+
+  // Quiz
+  function quizAnswer(btn, msg) {
+    document.querySelectorAll('.quiz-options button').forEach(b => b.disabled = true);
+    document.getElementById('quizResult').textContent = msg;
+  }
+
+  function revealVerdict() {
+    document.getElementById('verdictReveal').classList.add('show');
+  }
+
+  // Falling sugar cubes canvas
+  const canvas = document.getElementById('sugarCanvas');
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let cubes = [];
+  for (let i = 0; i < 26; i++) {
+    cubes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * -canvas.height,
+      size: Math.random() * 6 + 5,
+      speed: Math.random() * 0.6 + 0.3,
+      drift: Math.random() * 0.6 - 0.3,
+      rot: Math.random() * 360,
+      rotSpeed: Math.random() * 1 - 0.5
+    });
+  }
+  function animateCubes() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    cubes.forEach(c => {
+      c.y += c.speed;
+      c.x += c.drift;
+      c.rot += c.rotSpeed;
+      if (c.y > canvas.height + 10) {
+        c.y = -10;
+        c.x = Math.random() * canvas.width;
+      }
+      ctx.save();
+      ctx.translate(c.x, c.y);
+      ctx.rotate(c.rot * Math.PI / 180);
+      ctx.fillStyle = 'rgba(240,240,240,0.75)';
+      ctx.strokeStyle = 'rgba(150,150,150,0.5)';
+      ctx.fillRect(-c.size/2, -c.size/2, c.size, c.size);
+      ctx.strokeRect(-c.size/2, -c.size/2, c.size, c.size);
+      ctx.restore();
+    });
+    requestAnimationFrame(animateCubes);
+  }
+  animateCubes();
+</script>
+
+</body>
+</html>

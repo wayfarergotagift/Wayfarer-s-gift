@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;600;700&display=swap');
+
+  :root{
+    --bg-deep:#241435;
+    --bg-mid:#3a2454;
+    --bg-mid2:#4b2f68;
+    --lavender:#b79ce0;
+    --lavender-soft:#d9c8f2;
+    --pink:#f2c2d6;
+    --gold:#e9c97e;
+    --cream:#f7f1ea;
+    --wing-teal:#7fd6c2;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 20% 0%, var(--bg-mid2) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 100%, var(--bg-mid) 0%, transparent 60%),
+      var(--bg-deep);
+    font-family:'Quicksand', sans-serif;
+    color:var(--cream);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* floating ambient butterflies */
+  .ambient-fly{
+    position:fixed;
+    font-size:18px;
+    color:var(--wing-teal);
+    opacity:.55;
+    pointer-events:none;
+    z-index:1;
+    animation: drift linear infinite;
+  }
+  @keyframes drift{
+    0%{ transform:translate(0,0) rotate(0deg); }
+    25%{ transform:translate(30px,-40px) rotate(10deg); }
+    50%{ transform:translate(-10px,-90px) rotate(-8deg); }
+    75%{ transform:translate(-40px,-40px) rotate(6deg); }
+    100%{ transform:translate(0,-140px) rotate(0deg); opacity:0; }
+  }
+
+  .sparkle{
+    position:fixed;
+    border-radius:50%;
+    background:var(--cream);
+    pointer-events:none;
+    z-index:1;
+    animation: twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{ opacity:.15; transform:scale(.8); }
+    50%{ opacity:.9; transform:scale(1.3); }
+  }
+
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+    padding:64px 24px 100px;
+    position:relative;
+    z-index:2;
+  }
+
+  /* wisteria border at top */
+  .wisteria{
+    display:flex;
+    justify-content:space-between;
+    padding:0 4px 28px;
+    user-select:none;
+  }
+  .wisteria span{
+    font-size:22px;
+    color:var(--lavender);
+    animation: sway 3.4s ease-in-out infinite;
+  }
+  .wisteria span:nth-child(2n){ animation-delay:.4s; color:var(--pink);}
+  .wisteria span:nth-child(3n){ animation-delay:.8s; color:var(--lavender-soft);}
+  @keyframes sway{
+    0%,100%{ transform:rotate(-6deg) translateY(0); }
+    50%{ transform:rotate(6deg) translateY(4px); }
+  }
+
+  .wisteria.bottom-vine{
+    padding:28px 4px 0;
+  }
+
+  h1{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:clamp(38px,7vw,58px);
+    line-height:1.05;
+    margin:0 0 6px;
+    color:var(--cream);
+    text-align:center;
+    text-shadow: 0 0 30px rgba(183,156,224,0.55), 0 0 60px rgba(233,201,126,0.25);
+  }
+  .sub{
+    text-align:center;
+    color:var(--lavender-soft);
+    font-size:16px;
+    letter-spacing:.02em;
+    margin:0 0 40px;
+  }
+
+  .note{
+    background:rgba(247,241,234,0.06);
+    border:1px solid rgba(183,156,224,0.35);
+    border-radius:18px;
+    padding:26px 28px;
+    font-size:17px;
+    line-height:1.65;
+    color:var(--cream);
+    margin-bottom:44px;
+  }
+  .note em{ color:var(--wing-teal); font-style:normal; font-weight:600; }
+
+  /* cake */
+  .cake-section{ text-align:center; margin-bottom:52px; }
+  .cake-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:24px;
+    margin-bottom:18px;
+    color:var(--cream);
+  }
+  .cake{ display:inline-block; position:relative; }
+  .flame{
+    width:8px; height:14px;
+    background:radial-gradient(circle at 50% 30%, #fff2c9, var(--gold) 60%, #d98a3d);
+    border-radius:50% 50% 50% 50% / 65% 65% 35% 35%;
+    margin:0 auto;
+    transform-origin:bottom center;
+    animation:flicker 1.4s ease-in-out infinite;
+    cursor:pointer;
+  }
+  @keyframes flicker{
+    0%,100%{ transform:scale(1) rotate(-2deg); }
+    50%{ transform:scale(1.1) rotate(2deg); }
+  }
+  .flame.out{ background:transparent; animation:none; }
+  .candles{ display:flex; gap:16px; justify-content:center; margin-bottom:-4px; }
+  .wick{ width:2px; height:10px; background:#c9b89a; margin:0 auto; }
+  .tier{
+    width:220px; height:36px;
+    background:linear-gradient(180deg, var(--pink), #e2a6c0);
+    border-radius:6px;
+    margin:0 auto;
+    box-shadow: 0 3px 0 rgba(0,0,0,.15) inset;
+  }
+  .tier.bottom{ width:270px; height:44px; background:linear-gradient(180deg, var(--lavender), #9a7bc4); }
+  .drip{ height:6px; background:repeating-linear-gradient(90deg, var(--gold) 0 8px, transparent 8px 16px); opacity:.8;}
+
+  .blow-btn{
+    margin-top:22px;
+    background:var(--gold);
+    color:var(--bg-deep);
+    border:none;
+    padding:12px 26px;
+    border-radius:999px;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    transition:transform .15s ease;
+  }
+  .blow-btn:hover{ transform:translateY(-2px); }
+  .blow-btn:disabled{ opacity:.4; cursor:default; transform:none; }
+  .wish-result{
+    margin-top:18px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:20px;
+    color:var(--wing-teal);
+    min-height:28px;
+  }
+
+  /* butterfly garden */
+  .garden-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:24px;
+    text-align:center;
+    margin-bottom:6px;
+  }
+  .garden-sub{
+    text-align:center;
+    font-size:13px;
+    color:var(--lavender-soft);
+    margin-bottom:26px;
+  }
+  .garden{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:14px;
+    margin-bottom:20px;
+  }
+  @media(max-width:480px){ .garden{ grid-template-columns:repeat(3,1fr);} }
+
+  .fly-btn{
+    background:rgba(183,156,224,0.1);
+    border:1px solid rgba(183,156,224,0.4);
+    border-radius:14px;
+    aspect-ratio:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    cursor:pointer;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .fly-btn:hover{ transform:scale(1.08); }
+  .fly-btn.found{
+    background:rgba(233,201,126,0.15);
+    border-color:var(--gold);
+    cursor:default;
+    animation:pop .35s ease;
+  }
+  @keyframes pop{ 0%{transform:scale(.7);} 60%{transform:scale(1.15);} 100%{transform:scale(1);} }
+
+  .reveal{
+    background:rgba(247,241,234,0.07);
+    border:1px solid rgba(233,201,126,0.35);
+    border-radius:14px;
+    padding:18px 20px;
+    font-size:15.5px;
+    line-height:1.6;
+    min-height:26px;
+    color:var(--cream);
+    transition:opacity .3s ease;
+  }
+  .progress{
+    text-align:center;
+    font-size:12px;
+    color:var(--lavender-soft);
+    margin-top:14px;
+  }
+
+  /* hug button */
+  .hug-section{
+    text-align:center;
+    margin:52px 0;
+  }
+  .hug-btn{
+    background:transparent;
+    border:1px solid rgba(242,194,214,0.5);
+    color:var(--pink);
+    padding:12px 28px;
+    border-radius:999px;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    transition:transform .15s ease, background .2s ease;
+  }
+  .hug-btn:hover{ transform:translateY(-2px); background:rgba(242,194,214,0.1); }
+  .hug-note{
+    margin-top:14px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    color:var(--pink);
+    min-height:26px;
+  }
+  .heart-piece{
+    position:fixed;
+    bottom:-10px;
+    font-size:16px;
+    z-index:50;
+    pointer-events:none;
+    animation: floatUp linear forwards;
+  }
+  @keyframes floatUp{
+    0%{ transform:translateY(0) translateX(0) scale(.8); opacity:1; }
+    100%{ transform:translateY(-100vh) translateX(var(--drift,0px)) scale(1.1); opacity:0; }
+  }
+
+  /* paper plane across the miles */
+  .plane-section{
+    text-align:center;
+    margin-bottom:52px;
+  }
+  .plane-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:24px;
+    margin-bottom:6px;
+  }
+  .plane-sub{
+    font-size:13px;
+    color:var(--lavender-soft);
+    margin-bottom:22px;
+  }
+  .sky{
+    position:relative;
+    height:90px;
+    border-bottom:1px dashed rgba(183,156,224,0.4);
+    margin-bottom:22px;
+    overflow:hidden;
+  }
+  .plane{
+    position:absolute;
+    left:-60px;
+    top:38px;
+    font-size:28px;
+    transform:rotate(90deg);
+    opacity:0;
+  }
+  .plane.flying{
+    animation: flyAcross 2.6s ease-in-out forwards;
+  }
+  @keyframes flyAcross{
+    0%{ left:-60px; top:55px; opacity:1; transform:rotate(90deg) translateY(0); }
+    15%{ opacity:1; }
+    50%{ top:10px; transform:rotate(90deg) translateY(-6px); }
+    85%{ opacity:1; }
+    100%{ left:105%; top:45px; opacity:0; transform:rotate(90deg) translateY(0); }
+  }
+  .send-btn{
+    background:transparent;
+    border:1px solid rgba(233,201,126,0.6);
+    color:var(--gold);
+    padding:11px 24px;
+    border-radius:999px;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    transition:transform .15s ease, background .2s ease;
+  }
+  .send-btn:hover{ transform:translateY(-2px); background:rgba(233,201,126,0.1); }
+  .send-btn:disabled{ opacity:.4; cursor:default; transform:none; }
+  .plane-result{
+    margin-top:18px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    color:var(--gold);
+    min-height:26px;
+    padding:0 10px;
+  }
+  .plane-count{
+    margin-top:8px;
+    font-size:11px;
+    color:var(--lavender-soft);
+  }
+
+  footer{
+    text-align:center;
+    margin-top:56px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:18px;
+    color:var(--lavender-soft);
+  }
+
+  /* confetti */
+  .confetti-piece{
+    position:fixed;
+    top:-10px;
+    width:8px; height:14px;
+    z-index:50;
+    pointer-events:none;
+    animation: fall linear forwards;
+  }
+  @keyframes fall{
+    to{ transform:translateY(110vh) rotate(540deg); opacity:.9; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="wisteria" id="wisteria"></div>
+
+  <h1>Happy Birthday, Rawnak 🦋</h1>
+  <p class="sub">September 12 — your day</p>
+
+  <div class="note">
+    However this year's been, you made it through — and that's worth celebrating loudly.
+    Here's to more calm days, more inside jokes, and more excuses to say <em>proud of you.</em>
+  </div>
+
+  <div class="cake-section">
+    <div class="cake-title">Make a wish</div>
+    <div class="cake">
+      <div class="candles" id="candles"></div>
+      <div class="tier"></div>
+      <div class="drip"></div>
+      <div class="tier bottom"></div>
+    </div>
+    <br>
+    <button class="blow-btn" id="blowBtn">Blow out the candles</button>
+    <div class="wish-result" id="wishResult"></div>
+  </div>
+
+  <div class="garden-title">Find the butterflies</div>
+  <div class="garden-sub">tap each one for a little note</div>
+  <div class="garden" id="garden"></div>
+  <div class="reveal" id="reveal">tap a butterfly to begin ✨</div>
+  <div class="progress" id="progress">0 / 8 found</div>
+
+  <div class="plane-section">
+    <div class="plane-title">Send it across the miles</div>
+    <div class="plane-sub">a little something that travels the distance</div>
+    <div class="sky">
+      <div class="plane" id="plane">✈️</div>
+    </div>
+    <button class="send-btn" id="sendBtn">Send a paper plane</button>
+    <div class="plane-result" id="planeResult"></div>
+    <div class="plane-count" id="planeCount"></div>
+  </div>
+
+  <div class="hug-section">
+    <button class="hug-btn" id="hugBtn">Send a hug</button>
+    <div class="hug-note" id="hugNote"></div>
+  </div>
+
+  <div class="wisteria bottom-vine" id="wisteriaBottom"></div>
+
+  <footer>as graceful as your favorite Hashira — happy birthday, Shinobu fan 🦋</footer>
+</div>
+
+<script>
+  // wisteria dots
+  const wisteria = document.getElementById('wisteria');
+  const wisteriaBottom = document.getElementById('wisteriaBottom');
+  for(let i=0;i<14;i++){
+    const s = document.createElement('span');
+    s.textContent = '✿';
+    wisteria.appendChild(s);
+    const s2 = document.createElement('span');
+    s2.textContent = '✿';
+    wisteriaBottom.appendChild(s2);
+  }
+
+  // twinkling sparkles
+  for(let i=0;i<40;i++){
+    const sp = document.createElement('div');
+    sp.className='sparkle';
+    const size = 2+Math.random()*3;
+    sp.style.width = size+'px';
+    sp.style.height = size+'px';
+    sp.style.left = Math.random()*100+'vw';
+    sp.style.top = Math.random()*100+'vh';
+    sp.style.animationDuration = (2+Math.random()*3)+'s';
+    sp.style.animationDelay = (Math.random()*4)+'s';
+    document.body.appendChild(sp);
+  }
+
+  // ambient background butterflies
+  const flyColors = ['#7fd6c2', '#6fa8dc', '#8ec6f0', '#5b9bd5'];
+  for(let i=0;i<18;i++){
+    const b = document.createElement('div');
+    b.className='ambient-fly';
+    b.textContent='🦋';
+    b.style.color = flyColors[Math.floor(Math.random()*flyColors.length)];
+    b.style.left = Math.random()*100+'vw';
+    b.style.bottom = '-5vh';
+    b.style.fontSize = (14+Math.random()*14)+'px';
+    b.style.animationDuration = (12+Math.random()*14)+'s';
+    b.style.animationDelay = (Math.random()*14)+'s';
+    document.body.appendChild(b);
+  }
+
+  // candles
+  const candleCount = 5;
+  const candlesEl = document.getElementById('candles');
+  for(let i=0;i<candleCount;i++){
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `<div class="flame" data-i="${i}"></div><div class="wick"></div>`;
+    candlesEl.appendChild(wrap);
+  }
+  let litCount = candleCount;
+  document.querySelectorAll('.flame').forEach(f=>{
+    f.addEventListener('click', ()=>{
+      if(!f.classList.contains('out')){
+        f.classList.add('out');
+        litCount--;
+        checkBlown();
+      }
+    });
+  });
+  const blowBtn = document.getElementById('blowBtn');
+  const wishResult = document.getElementById('wishResult');
+  blowBtn.addEventListener('click', ()=>{
+    document.querySelectorAll('.flame').forEach(f=>f.classList.add('out'));
+    litCount = 0;
+    checkBlown();
+  });
+  function checkBlown(){
+    if(litCount<=0){
+      blowBtn.disabled = true;
+      wishResult.textContent = 'Wish made. Here\'s hoping it comes true 🎂';
+      burstConfetti();
+    }
+  }
+
+  function burstConfetti(){
+    const colors = ['#e9c97e','#b79ce0','#f2c2d6','#7fd6c2'];
+    for(let i=0;i<80;i++){
+      const p = document.createElement('div');
+      p.className='confetti-piece';
+      p.style.left = Math.random()*100+'vw';
+      p.style.background = colors[Math.floor(Math.random()*colors.length)];
+      p.style.animationDuration = (2.2+Math.random()*1.8)+'s';
+      p.style.borderRadius = Math.random()>.5 ? '50%':'2px';
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(), 4200);
+    }
+  }
+
+  // butterfly garden messages
+  const messages = [
+    "Whatever this year threw at you, you kept going. That's the part I'm proudest of.",
+    "You've got the same quiet strength as your favorite Hashira — steady, sharp, and kind underneath.",
+    "I don't say it enough, but having you as my sister makes everything easier.",
+    "Here's to leaving the hard stretch behind and making this year genuinely good.",
+    "You notice things other people miss. That's a rare thing about you.",
+    "May this year bring you more reasons to laugh than to worry.",
+    "No matter what, I've got your back — always have, always will.",
+    "Happy birthday. Go do something today that's just for you."
+  ];
+
+  const garden = document.getElementById('garden');
+  const reveal = document.getElementById('reveal');
+  const progress = document.getElementById('progress');
+  let found = 0;
+  const order = messages.map((_,i)=>i).sort(()=>Math.random()-0.5);
+
+  order.forEach((msgIndex, slot)=>{
+    const btn = document.createElement('div');
+    btn.className='fly-btn';
+    btn.textContent='🦋';
+    btn.addEventListener('click', ()=>{
+      if(btn.classList.contains('found')) return;
+      btn.classList.add('found');
+      btn.textContent='✿';
+      reveal.style.opacity=0;
+      setTimeout(()=>{
+        reveal.textContent = messages[msgIndex];
+        reveal.style.opacity=1;
+      },150);
+      found++;
+      progress.textContent = `${found} / ${messages.length} found`;
+      if(found===messages.length){
+        setTimeout(()=>{ burstConfetti(); },300);
+      }
+    });
+    garden.appendChild(btn);
+  });
+
+  // hug button
+  const hugMessages = [
+    "sending the biggest hug your way 🤍",
+    "consider yourself hugged, tightly.",
+    "wish this could reach you for real.",
+    "a hug, a squeeze, and a happy birthday.",
+    "here's one more, just because."
+  ];
+  let hugIndex = 0;
+  const hugBtn = document.getElementById('hugBtn');
+  const hugNote = document.getElementById('hugNote');
+  hugBtn.addEventListener('click', ()=>{
+    hugNote.textContent = hugMessages[hugIndex % hugMessages.length];
+    hugIndex++;
+    for(let i=0;i<14;i++){
+      const h = document.createElement('div');
+      h.className='heart-piece';
+      h.textContent = ['💜','💕','🤍'][Math.floor(Math.random()*3)];
+      h.style.left = (35+Math.random()*30)+'vw';
+      h.style.setProperty('--drift', (Math.random()*80-40)+'px');
+      h.style.animationDuration = (2+Math.random()*1.5)+'s';
+      h.style.fontSize = (14+Math.random()*10)+'px';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 3600);
+    }
+  });
+
+  // paper plane across the miles
+  const planeNotes = [
+    "Wish I could hand this to you in person.",
+    "Distance is just the annoying part — none of the love got lost in transit.",
+    "If hugs could fly, this plane would be one.",
+    "Closing the gap, one small message at a time.",
+    "Still your person, no matter how many time zones between us.",
+    "This one's carrying every birthday wish I couldn't say in person."
+  ];
+  let planeSentCount = 0;
+  const plane = document.getElementById('plane');
+  const sendBtn = document.getElementById('sendBtn');
+  const planeResult = document.getElementById('planeResult');
+  const planeCount = document.getElementById('planeCount');
+  sendBtn.addEventListener('click', ()=>{
+    if(plane.classList.contains('flying')) return;
+    sendBtn.disabled = true;
+    planeResult.textContent = '';
+    plane.classList.remove('flying');
+    void plane.offsetWidth; // restart animation
+    plane.classList.add('flying');
+    setTimeout(()=>{
+      const note = planeNotes[Math.floor(Math.random()*planeNotes.length)];
+      planeResult.textContent = note;
+      planeSentCount++;
+      planeCount.textContent = `${planeSentCount} plane${planeSentCount===1?'':'s'} sent so far`;
+      plane.classList.remove('flying');
+      sendBtn.disabled = false;
+    }, 2700);
+  });
+</script>
+
+</body>
+</html>

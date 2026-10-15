@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>பிறந்தநாள் வாழ்த்துகள் அம்மா</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@500;700&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--coal:#151518;--smoke:#212126;--ash:#34343b;--red:#e0343f;--deep:#8f1d29;--blush:#ff9aa5;--text:#f3ece9;--mute:#a9a1a3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;color:var(--text);font:400 17px/1.8 "Noto Sans Tamil",system-ui,sans-serif;background:radial-gradient(ellipse at 15% 0%,#2b2b31,transparent 55%),radial-gradient(ellipse at 95% 38%,#2a1519,transparent 50%),radial-gradient(ellipse at 10% 75%,#232329,transparent 55%),linear-gradient(180deg,#0d0d0f,#18181b 50%,#0f0f11);background-attachment:fixed;overflow-x:hidden}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 20px}
+section{padding:70px 0 30px}
+h1,h2,.name{font-family:"Noto Serif Tamil",Georgia,serif;font-weight:700;margin:0}
+h2{font-size:clamp(28px,5.5vw,42px);line-height:1.4;text-align:center;margin-bottom:6px}
+.sub{text-align:center;color:var(--mute);margin:0 auto 32px;max-width:46ch}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--blush);outline-offset:3px}
+.btn{background:linear-gradient(135deg,var(--red),var(--deep));border:0;border-radius:999px;padding:12px 28px;font-weight:600;box-shadow:0 8px 28px -8px var(--red);transition:transform .2s}
+.btn:hover{transform:translateY(-2px) scale(1.03)}
+.ghost{background:transparent;border:1px solid var(--ash);box-shadow:none}
+.center{text-align:center}
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 0 30px}
+.hero h1{font-size:clamp(22px,4.6vw,38px);line-height:1.5;font-weight:500;color:var(--blush)}
+.name{font-size:clamp(84px,22vw,210px);line-height:1.35;padding:0 .1em;background:linear-gradient(180deg,#fff0ee,#ff6a76 55%,#b02634);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 28px rgba(224,52,63,.35));animation:rise 1.4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.96)}}
+.date{color:var(--mute);margin-bottom:24px;font-size:18px}
+.hint{color:var(--mute);font-size:14px;margin-top:18px}
+.hug{width:130px;height:130px;border-radius:50%;border:0;font-size:62px;background:radial-gradient(circle at 35% 30%,#ff6a76,#b02634);box-shadow:0 14px 44px -10px var(--red);animation:beat 1.6s infinite;margin-bottom:6px}
+.hug.pop{animation:pop .35s}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.07)}30%{transform:scale(1)}45%{transform:scale(1.05)}}
+@keyframes pop{50%{transform:scale(1.25) rotate(-6deg)}}
+.hugmsg{min-height:32px;margin:12px 0 22px;color:var(--blush);font-weight:600}
+.cake{display:block;margin:0 auto;width:min(380px,90%);overflow:visible}
+.cd2{cursor:pointer}
+.fl{transform-box:fill-box;transform-origin:50% 100%;animation:fk .35s ease-in-out infinite alternate;filter:drop-shadow(0 0 7px #ffb347);transition:opacity .4s}
+.cd2:nth-child(odd) .fl{animation-delay:.12s}
+@keyframes fk{to{transform:scale(.88,1.1) rotate(4deg)}}
+.cd2.off .fl{opacity:0;animation:none}
+.cd2.off .sm{opacity:1}
+.sm{opacity:0;transition:opacity .6s .1s;fill:none;stroke:#8a8a92;stroke-width:2;stroke-linecap:round}
+#wish{text-align:center;margin:18px 0 12px;min-height:34px;font-weight:600;color:var(--blush)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{perspective:900px;height:170px;background:none;border:0;padding:0}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.card.on .in{transform:rotateY(180deg)}
+.f,.b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;display:grid;place-items:center;padding:18px;text-align:center}
+.f{background:linear-gradient(145deg,var(--smoke),var(--coal));border:1px solid var(--ash);color:var(--mute);font-size:30px}
+.f span{display:block;font-size:15px}
+.b{transform:rotateY(180deg);background:linear-gradient(145deg,#8f1d29,#d02f3c);font:600 18px/1.7 "Noto Serif Tamil",serif}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:26px 20px;padding:10px 0 24px}
+.pol{margin:0;padding:10px 10px 8px;background:#ece5e2;color:#2a2a2e;border-radius:4px;box-shadow:0 16px 30px -12px #000;transform:rotate(var(--r,0deg));transition:transform .25s}
+.pol:hover{transform:rotate(0) scale(1.05);z-index:2}
+.pol img,.ph{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#cfc7c4;cursor:zoom-in}
+.ph{display:grid;place-items:center;font-size:42px;color:#e0343f;cursor:default;background:linear-gradient(135deg,#d9d1ce,#c3bab7)}
+.pol figcaption{font:500 15px/1.6 "Noto Serif Tamil",serif;text-align:center;padding-top:6px;outline:none}
+#lb{position:fixed;inset:0;z-index:20;background:rgba(8,8,10,.92);display:none;place-items:center;padding:20px}
+#lb.on{display:grid}
+#lb img{max-width:100%;max-height:88vh;border-radius:6px}
+.env{display:block;margin:0 auto 18px}
+.wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s ease}
+.wrap.on{grid-template-rows:1fr}
+.wrap>div{overflow:hidden}
+.letter{margin:0 auto;max-width:620px;padding:34px 30px;border-radius:18px;background:linear-gradient(160deg,var(--smoke),var(--coal));border:1px solid var(--ash);font:500 18px/2 "Noto Serif Tamil",serif}
+.letter p{margin:0 0 14px}
+.notetext{max-width:560px;min-height:120px;margin:24px auto 0;padding:24px;border-radius:18px;display:grid;place-items:center;text-align:center;background:linear-gradient(145deg,#8f1d29,#d02f3c);font:600 20px/1.8 "Noto Serif Tamil",serif}
+.nin{animation:pp .5s}
+@keyframes pp{from{opacity:0;transform:scale(.9) rotate(-2deg)}}
+#garden{position:relative;height:250px;border-radius:20px;border:1px solid var(--ash);overflow:hidden;cursor:pointer;touch-action:manipulation;background:linear-gradient(180deg,#1a1a1f,#202026 55%,#1b2a1d)}
+.fw{position:absolute;font-size:36px;line-height:1;user-select:none;pointer-events:none;transform:translate(-50%,-100%) scale(0);animation:gr .6s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes gr{to{transform:translate(-50%,-100%) scale(1)}}
+footer{text-align:center;padding:60px 0 70px;color:var(--mute)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<main>
+
+<section class="hero">
+  <h1>இனிய பிறந்தநாள் வாழ்த்துகள்</h1>
+  <div class="name">அம்மா</div>
+  <div class="date">அக்டோபர் 18</div>
+  <button class="hug" id="hug" aria-label="அம்மாவுக்கு அணைப்பு அனுப்பு">🤗</button>
+  <div class="hugmsg" id="hugmsg" role="status">அம்மாவுக்கு ஒரு அணைப்பு அனுப்புங்க</div>
+  <button class="btn" id="boom">கொண்டாடலாம் அம்மா</button>
+  <p class="hint">பக்கத்தில் எங்கு தொட்டாலும் இதயங்கள் வரும்</p>
+</section>
+
+<section>
+  <h2>ஒரு ஆசை சொல்லுங்க அம்மா</h2>
+  <p class="sub">ஒவ்வொரு மெழுகுவர்த்தியையும் தொட்டு ஊதுங்க.</p>
+  <svg class="cake" viewBox="0 0 300 260" role="img" aria-label="ஐந்து மெழுகுவர்த்திகளுடன் பிறந்தநாள் கேக்">
+    <ellipse cx="150" cy="234" rx="140" ry="14" fill="#2a2a30"/>
+    <rect x="38" y="168" width="224" height="64" rx="14" fill="#7d1b24"/>
+    <rect x="68" y="118" width="164" height="56" rx="12" fill="#b02634"/>
+    <rect x="98" y="78" width="104" height="46" rx="11" fill="#e0343f"/>
+    <path d="M38 184q14 16 28 0t28 0 28 0 28 0 28 0 28 0 28 0 18 0" fill="none" stroke="#ffc9cf" stroke-width="7" stroke-linecap="round"/>
+    <path d="M68 134q13 14 26 0t26 0 26 0 26 0 26 0" fill="none" stroke="#ffc9cf" stroke-width="6" stroke-linecap="round"/>
+    <path d="M98 92q13 12 26 0t26 0 26 0" fill="none" stroke="#ffc9cf" stroke-width="5" stroke-linecap="round"/>
+    <g id="candles"></g>
+  </svg>
+  <p id="wish" role="status">5 மெழுகுவர்த்திகள் எரிகின்றன</p>
+  <div class="center"><button class="btn ghost" id="relight">மீண்டும் ஏற்று</button></div>
+</section>
+
+<section>
+  <h2>அம்மா, நீங்க ஏன் எனக்கு உயிர்</h2>
+  <p class="sub">அட்டையைத் தொட்டுப் பாருங்க.</p>
+  <div class="grid" id="reasons"></div>
+</section>
+
+<section>
+  <h2>நம்ம நினைவுகள்</h2>
+  <p class="sub">உங்களோடு எடுத்த படங்களைச் சேருங்க. படத்தைத் தொட்டா பெரிதாகும், தலைப்பைத் தொட்டு மாத்தலாம்.</p>
+  <div class="gal" id="gal"></div>
+  <div class="center"><button class="btn" id="add">படங்களைச் சேர்</button><input type="file" id="file" accept="image/*" multiple hidden></div>
+</section>
+
+<section>
+  <h2>அம்மாவுக்கு ஒரு கடிதம்</h2>
+  <p class="sub">என் மனசுல இருந்து.</p>
+  <button class="btn env" id="open">கடிதத்தைத் திற</button>
+  <div class="wrap" id="wrap"><div><div class="letter">
+    <p>அன்புள்ள அம்மாவுக்கு,</p>
+    <p>இனிய பிறந்தநாள் வாழ்த்துகள்! நான் கேட்காமலே எனக்காக நீங்க செய்த ஒவ்வொரு விஷயத்துக்கும் நன்றி. நான் அழுதப்போ நீங்க துடைச்ச கண்ணீரும், விழுந்தப்போ தூக்கின கையும் எனக்கு எப்பவும் நினைவிருக்கு.</p>
+    <p>இந்த உலகத்துல எனக்குக் கிடைச்ச பெரிய வரம் நீங்கதான் அம்மா. இந்த வருஷம் உங்க முகத்துல எப்பவும் சிரிப்பு இருக்கணும். அதுக்கு நான் எப்பவும் துணையா இருப்பேன்.</p>
+    <p>உங்களை உயிருக்கு மேல நேசிக்கிற,<br>உங்க மகன்</p>
+  </div></div></div>
+</section>
+
+<section>
+  <h2>அம்மாவுக்கு அன்புச் செய்தி</h2>
+  <p class="sub">தொட்டா உங்களுக்காக ஒரு செய்தி வரும்.</p>
+  <div class="center"><button class="btn" id="note">செய்தியை எடு</button></div>
+  <div class="notetext" id="notetext" role="status">♥</div>
+</section>
+
+<section>
+  <h2>அம்மாவின் தோட்டம்</h2>
+  <p class="sub">எங்கு வேணும்னாலும் தொட்டு பூ நடுங்க.</p>
+  <div id="garden" aria-label="தோட்டம்"></div>
+  <p class="center hint" id="gcount">இன்னும் எதுவும் நடவில்லை</p>
+  <div class="center"><button class="btn ghost" id="clear">தோட்டத்தை அழி</button></div>
+</section>
+
+<footer>அம்மாவுக்காக, அன்புடன் உங்க மகன் ♥</footer>
+</main>
+<div id="lb"><img alt=""></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const cv=$('#fx'),x=cv.getContext('2d');let W,H,P=[];
+function rs(){const r=devicePixelRatio||1;W=innerWidth;H=innerHeight;cv.width=W*r;cv.height=H*r;x.setTransform(r,0,0,r,0,0)}
+addEventListener('resize',rs);rs();
+const cols=['#e0343f','#ff9aa5','#f5d0a9','#ffffff','#b02634'];
+function heart(px,py,o={}){P.push({t:'h',x:px,y:py,vx:o.vx??(Math.random()-.5)*4,vy:o.vy??-2-Math.random()*3,g:o.g??.07,s:o.s??12+Math.random()*14,a:o.a??1,da:o.da??.014,c:cols[Math.random()*2|0],r:0,vr:0})}
+function confetti(px,py,n=130){for(let i=0;i<n;i++){const a=Math.random()*6.283,s=4+Math.random()*8;P.push({t:'c',x:px,y:py,vx:Math.cos(a)*s,vy:Math.sin(a)*s-5,g:.2,s:6+Math.random()*6,a:1,da:.007,c:cols[Math.random()*5|0],r:Math.random()*6,vr:(Math.random()-.5)*.4})}}
+function loop(){x.clearRect(0,0,W,H);for(const p of P){p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.r+=p.vr;p.a-=p.da;x.globalAlpha=Math.max(p.a,0);x.fillStyle=p.c;if(p.t=='h'){x.font=p.s+'px serif';x.textAlign='center';x.fillText('♥',p.x,p.y)}else{x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);x.restore()}}P=P.filter(p=>p.a>0&&p.y<H+40&&p.y>-60);requestAnimationFrame(loop)}
+loop();
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(!calm)setInterval(()=>{if(P.length<40)heart(Math.random()*W,H+10,{vx:(Math.random()-.5)*.6,vy:-.9,g:0,a:.3,da:.0006,s:10+Math.random()*14})},700);
+addEventListener('pointerdown',e=>{if(calm)return;for(let i=0;i<7;i++)heart(e.clientX,e.clientY)});
+$('#boom').onclick=()=>confetti(innerWidth/2,innerHeight/2.2,160);
+
+let hugs=0;const hm=['அன்போட சேர்ந்துடுச்சு ♥','அம்மா மனசு நிறைஞ்சுடுச்சு','இன்னும் இறுக்கமா!','உலகத்துலயே சூடான அணைப்பு','அம்மா இப்போ சிரிக்கிறாங்க'];
+$('#hug').onclick=e=>{hugs++;const b=e.currentTarget,r=b.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;for(let i=0;i<10;i++)heart(cx,cy);
+ b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');
+ $('#hugmsg').textContent=hugs+' அணைப்புகள் அனுப்பியாச்சு. '+hm[hugs%hm.length];
+ if(hugs%10==0)confetti(cx,cy,120)};
+
+const NS='http://www.w3.org/2000/svg',xs=[112,131,150,169,188];
+xs.forEach((cx,i)=>{const g=document.createElementNS(NS,'g');g.setAttribute('class','cd2');g.setAttribute('tabindex','0');g.setAttribute('role','button');g.setAttribute('aria-label','மெழுகுவர்த்தி '+(i+1));
+ g.innerHTML=`<rect x="${cx-4}" y="50" width="8" height="30" rx="2" fill="${i%2?'#ffd3d7':'#fff'}"/><rect x="${cx-4}" y="58" width="8" height="4" fill="#e0343f" opacity=".5"/><path class="sm" d="M${cx} 46q-6-8 0-14t0-14"/><ellipse class="fl" cx="${cx}" cy="40" rx="5" ry="9" fill="#ffb347"/><ellipse class="fl" cx="${cx}" cy="43" rx="2.5" ry="5" fill="#fff3c4"/><rect x="${cx-12}" y="20" width="24" height="60" fill="transparent"/>`;
+ $('#candles').appendChild(g)});
+const cs=[...document.querySelectorAll('.cd2')];
+function check(){const lit=cs.filter(c=>!c.classList.contains('off')).length;
+ if(!lit){$('#wish').textContent='ஆசை சொல்லியாச்சு அம்மா. எல்லாமே நிறைவேறட்டும் ♥';const r=$('.cake').getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/3,170)}
+ else $('#wish').textContent=lit+' மெழுகுவர்த்திகள் எரிகின்றன'}
+cs.forEach(c=>{const f=()=>{c.classList.toggle('off');check()};c.onclick=f;c.onkeydown=e=>{if(e.key=='Enter'||e.key==' '){e.preventDefault();f()}}});
+$('#relight').onclick=()=>{cs.forEach(c=>c.classList.remove('off'));check()};
+
+['நீங்க இருக்கிற வீடுதான் எனக்கு வீடு','நான் சொல்லாமலே என் கவலையைப் புரிஞ்சுப்பீங்க','உங்க கை சாப்பாடு போல உலகத்துல எதுவும் இல்ல','நான் தூங்கினப்பறமும் எனக்காக விழிச்சிருந்தீங்க','யாருக்கும் தெரியாம எவ்ளோ கஷ்டம் தாங்கினீங்க','நான் எவ்ளோ வளர்ந்தாலும் உங்களுக்கு நான் குழந்தைதான்'].forEach((t,i)=>{
+ const b=document.createElement('button');b.className='card';b.setAttribute('aria-label','காரணம் '+(i+1));
+ b.innerHTML='<div class="in"><div class="f"><div>♥<span>தொடுங்க</span></div></div><div class="b">'+t+'</div></div>';
+ b.onclick=()=>{b.classList.toggle('on');if(b.classList.contains('on')){const r=b.getBoundingClientRect();for(let k=0;k<6;k++)heart(r.left+r.width/2,r.top+r.height/2)}};
+ $('#reasons').appendChild(b)});
+
+const gal=$('#gal');
+for(let i=0;i<3;i++){const f=document.createElement('figure');f.className='pol ph-f';f.style.setProperty('--r',(i*4-4)+'deg');f.innerHTML='<div class="ph">♥</div><figcaption>உங்க படம் இங்கே</figcaption>';gal.appendChild(f)}
+$('#add').onclick=()=>$('#file').click();
+function addPhoto(src){const old=gal.querySelector('.ph-f');if(old)old.remove();
+ const f=document.createElement('figure');f.className='pol';f.style.setProperty('--r',(Math.random()*6-3).toFixed(1)+'deg');
+ const im=new Image();im.src=src;im.alt='அம்மாவுடன் புகைப்படம்';im.onclick=()=>{$('#lb img').src=im.src;$('#lb').classList.add('on')};
+ const c=document.createElement('figcaption');c.contentEditable='true';c.textContent='நம்ம தருணம் ♥';
+ f.append(im,c);gal.insertBefore(f,gal.firstChild)}
+fetch('/api/photos').then(r=>r.json()).then(l=>l.forEach(n=>addPhoto('/photos/'+n))).catch(()=>{});
+$('#file').onchange=async e=>{for(const file of e.target.files){
+ try{const r=await fetch('/upload',{method:'POST',headers:{'X-Filename':encodeURIComponent(file.name)},body:file});const j=await r.json();addPhoto('/photos/'+j.name)}
+ catch(_){addPhoto(URL.createObjectURL(file))}}
+ e.target.value=''};
+$('#lb').onclick=()=>$('#lb').classList.remove('on');
+addEventListener('keydown',e=>{if(e.key=='Escape')$('#lb').classList.remove('on')});
+
+$('#open').onclick=()=>{const w=$('#wrap');w.classList.toggle('on');const on=w.classList.contains('on');$('#open').textContent=on?'கடிதத்தை மூடு':'கடிதத்தைத் திற';if(on){const r=$('#open').getBoundingClientRect();for(let k=0;k<10;k++)heart(r.left+r.width/2,r.top)}};
+
+const notes=['நீங்கதான் என் முதல் உலகம், என் முதல் நண்பர்.','என்கிட்ட நல்லது என்ன இருந்தாலும் அது உங்ககிட்ட இருந்து வந்தது.','இன்னைக்கு உலகமே உங்களுக்குச் சொந்தம் அம்மா.','எனக்காக நீங்க விழிச்ச ஒவ்வொரு இரவுக்கும் நன்றி.','உங்க சிரிப்புதான் எனக்குப் பிடிச்ச விஷயம்.','உங்க சமையலை விட உங்களை அதிகம் நேசிக்கிறேன். கொஞ்சம்தான்!','இன்னைக்கு நீங்க ஓய்வெடுங்க, உங்கள நான் பார்த்துக்கறேன்.','நான் பார்த்த வலிமையான மனிதர் நீங்கதான்.','நான் எவ்ளோ வளர்ந்தாலும் உங்க செல்லப் பிள்ளைதான்.','பிறந்தநாள் வாழ்த்துகள் அம்மா. வார்த்தையால சொல்ல முடியாத அளவு உங்களை நேசிக்கிறேன்.'];let last=-1;
+$('#note').onclick=e=>{let i;do{i=Math.random()*notes.length|0}while(i==last);last=i;const n=$('#notetext');n.classList.remove('nin');void n.offsetWidth;n.textContent=notes[i];n.classList.add('nin');const r=e.currentTarget.getBoundingClientRect();for(let k=0;k<8;k++)heart(r.left+r.width/2,r.top)};
+
+const fl=['🌸','🌹','🌷','🌻','🌺','🪷'];let planted=0;
+$('#garden').addEventListener('pointerdown',e=>{const g=e.currentTarget,r=g.getBoundingClientRect(),s=document.createElement('span');s.className='fw';s.textContent=fl[Math.random()*fl.length|0];s.style.left=(e.clientX-r.left)+'px';s.style.top=(e.clientY-r.top+16)+'px';g.appendChild(s);planted++;$('#gcount').textContent=planted+' பூக்கள் அம்மாவுக்காக நடப்பட்டன'});
+$('#clear').onclick=()=>{document.querySelectorAll('.fw').forEach(f=>f.remove());planted=0;$('#gcount').textContent='இன்னும் எதுவும் நடவில்லை'};
+</script>
+</body>
+</html>
